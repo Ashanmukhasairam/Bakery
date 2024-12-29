@@ -1,10 +1,10 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { FaSearch, FaFilter } from "react-icons/fa"; // Import search and filter icons
 import Sidebar from "./Sidebar";
 
 const Overview = () => {
   const [isDashboardOpen, setIsDashboardOpen] = useState(true);
-  const [selectedItem, setSelectedItem] =  useState('overview');
+  const [selectedItem, setSelectedItem] = useState(true);
   const [searchTerm, setSearchTerm] = useState(""); // State for search
   const [filterDate, setFilterDate] = useState(""); // State for filter by date
   const [selectedDateOrders, setSelectedDateOrders] = useState([]); // To store orders for selected date
@@ -87,26 +87,26 @@ const Overview = () => {
 
   return (
     <div className="flex">
-      <Sidebar   isDashboardOpen={isDashboardOpen}
+      <Sidebar
+        isDashboardOpen={isDashboardOpen}
         setIsDashboardOpen={setIsDashboardOpen}
         selectedItem={selectedItem}
         setSelectedItem={setSelectedItem}
-        />
+      />
       {/* Main Content */}
       <div className="flex-1 p-6">
         <div className="flex justify-between items-center">
-          {/* Search bar */}
+          {/* Overview Heading */}
           <h1 className="text-2xl font-bold text-gray-800">Overview</h1>
-          <div className="relative">
-            <input
-              type="text"
-              className="mr-10 pl-10 pr-4 py-2 border rounded-md"
-              placeholder="Search Orders"
-              value={searchTerm}
-              onChange={handleSearch}
-            />
-            <FaSearch className="absolute left-3 top-2 text-gray-500 mt-1" />
-          </div>
+          {/* Profile Button */}
+          <button className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center">
+  <img
+    src="https://www.w3schools.com/w3images/avatar2.png" // Replace with the actual image path
+    alt=""
+    className="w-full h-full rounded-full"
+  />
+</button>
+
         </div>
 
         {/* Cards for Today, This Week, This Month */}
@@ -115,7 +115,7 @@ const Overview = () => {
             <div className="bg-white p-6 rounded-lg shadow-md" key={period}>
               <h2 className="text-xl font-bold text-gray-700">{period}</h2>
               <p className="mt-2 text-gray-600">Total revenue earned</p>
-              <p className="text-2xl font-bold text-gray-800">₹5000</p>
+              < p className="text-2xl font-bold text-gray-800">₹5000</p>
               <p className="mt-4 text-gray-500">Planned amount for {period}</p>
               <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
                 <div className="bg-green-500 h-2 rounded-full" style={{ width: "60%" }}></div>

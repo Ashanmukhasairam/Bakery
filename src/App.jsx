@@ -10,6 +10,10 @@ import SignupPage from "./components/signup";
 import Myproducts from "./components/Myproducts";
 import Orders from "./components/Orders";
 
+
+
+<Route path="/analytics" element={<Analytics />} />
+
 const App = () => {
   const [bakery, setBakery] = useState(() => {
     const savedBakery = localStorage.getItem("bakery");

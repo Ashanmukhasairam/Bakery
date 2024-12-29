@@ -1,0 +1,11 @@
+import Newitem from './components/Newitem';
+import Drivers from './components/Drivers';
+import Reports from './components/Reports';
+import Settings from './components/Settings';
+
+
+ {/* <Route path="/analytics" element={<Analytics />} />
+            <Route path="/drivers" element={bakery ? <Drivers /> : <Navigate to="/Drivers" />} />
+            <Route path="/reports" element={bakery ? <Reports /> : <Navigate to="/Reports" />} />
+            <Route path="/newitem" element={bakery ? <Reports /> : <Navigate to="/Newitem" />} />
+            <Route path="/settings" element={bakery ? <Settings /> : <Navigate to="/Settings" />} /> */}
