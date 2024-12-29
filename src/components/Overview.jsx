@@ -3,6 +3,8 @@ import { FaSearch, FaFilter } from "react-icons/fa"; // Import search and filter
 import Sidebar from "./Sidebar";
 
 const Overview = () => {
+  const [isDashboardOpen, setIsDashboardOpen] = useState(true);
+  const [selectedItem, setSelectedItem] =  useState(true);
   const [searchTerm, setSearchTerm] = useState(""); // State for search
   const [filterDate, setFilterDate] = useState(""); // State for filter by date
   const [selectedDateOrders, setSelectedDateOrders] = useState([]); // To store orders for selected date
@@ -85,7 +87,11 @@ const Overview = () => {
 
   return (
     <div className="flex">
-      <Sidebar />
+      <Sidebar   isDashboardOpen={isDashboardOpen}
+        setIsDashboardOpen={setIsDashboardOpen}
+        selectedItem={selectedItem}
+        setSelectedItem={setSelectedItem}
+        />
       {/* Main Content */}
       <div className="flex-1 p-6">
         <div className="flex justify-between items-center">
