@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import Sidebar from "./Sidebar";
 
 const MarketPlace = () => {
   const [searchTerm, setSearchTerm] = useState(""); // State for search bar
   const [orders, setOrders] = useState([]);
-
+const [isDashboardOpen, setIsDashboardOpen] = useState(false)
+  const [selectedItem, setSelectedItem] = useState("marketplace")
   // Simulating fetching data from an API or Database
   useEffect(() => {
     // Sample data (replace this with actual fetch when backend is ready)
@@ -76,7 +77,12 @@ const MarketPlace = () => {
 
   return (
     <div className="flex">
-      <Sidebar />
+      <Sidebar
+        isDashboardOpen={isDashboardOpen}
+        setIsDashboardOpen={setIsDashboardOpen}
+        selectedItem={selectedItem}
+        setSelectedItem={setSelectedItem}
+      />
       {/* Main Content */}
       <div className="flex-1 p-6 ml-64">
         <div className="flex justify-between items-center">

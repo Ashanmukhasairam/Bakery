@@ -22,8 +22,6 @@ import Messages from './components/Messages';
 
 
 
-<Route path="/analytics" element={<Analytics />} />
-
 const App = () => {
   const { isAuthenticated } = useContext(UserContext)
 
@@ -81,6 +79,15 @@ const App = () => {
               element={
                 isAuthenticated ? <Myproducts /> : <Navigate to="/login" />
               }
+            />
+            
+            <Route
+                path="/analytics"
+                element={isAuthenticated ? <Analytics /> : <Navigate to="/login" />}
+            />
+            <Route
+                path="/newitem"
+                element={isAuthenticated ? <Newitem /> : <Navigate to="/login" />}
             />
             <Route
               path="*"

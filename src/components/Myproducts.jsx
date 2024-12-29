@@ -1,93 +1,113 @@
-import React, { useState } from "react";
-import Sidebar from "./Sidebar";
+import { useState, useEffect } from 'react'
+import Sidebar from './Sidebar'
+import { useContext } from 'react'
+import { UserContext } from '../context/UserContext'
 
 const Myproducts = () => {
+  const [isDashboardOpen, setIsDashboardOpen] = useState(false)
+  const [selectedItem, setSelectedItem] = useState('myproducts')
   const [products, setProducts] = useState([
     {
       id: 1,
-      name: "Chocolate Cake",
-      description: "Delicious chocolate cake with rich frosting.",
-      price: "$25",
-      image: "https://via.placeholder.com/150",
-      theme: "Chocolate",
+      name: 'Chocolate Cake',
+      description: 'Delicious chocolate cake with rich frosting.',
+      price: '$25',
+      image: 'https://via.placeholder.com/150',
+      theme: 'Chocolate',
       availability: 10, // Set initial available quantity
       rating: 4,
     },
     {
       id: 2,
-      name: "Vanilla Cake",
-      description: "Classic vanilla cake with buttercream icing.",
-      price: "$20",
-      image: "https://via.placeholder.com/150",
-      theme: "Vanilla",
+      name: 'Vanilla Cake',
+      description: 'Classic vanilla cake with buttercream icing.',
+      price: '$20',
+      image: 'https://via.placeholder.com/150',
+      theme: 'Vanilla',
       availability: 5,
       rating: 3,
     },
     {
       id: 3,
-      name: "Red Velvet Cake",
-      description: "Moist red velvet cake with cream cheese frosting.",
-      price: "$30",
-      image: "https://via.placeholder.com/150",
-      theme: "Red Velvet",
+      name: 'Red Velvet Cake',
+      description: 'Moist red velvet cake with cream cheese frosting.',
+      price: '$30',
+      image: 'https://via.placeholder.com/150',
+      theme: 'Red Velvet',
       availability: 7,
       rating: 5,
     },
     {
       id: 4,
-      name: "Strawberry Cake",
-      description: "Fresh strawberry cake with whipped cream.",
-      price: "$22",
-      image: "https://via.placeholder.com/150",
-      theme: "Strawberry",
+      name: 'Strawberry Cake',
+      description: 'Fresh strawberry cake with whipped cream.',
+      price: '$22',
+      image: 'https://via.placeholder.com/150',
+      theme: 'Strawberry',
       availability: 3,
       rating: 4,
     },
     {
       id: 5,
-      name: "Carrot Cake",
-      description: "Delicious carrot cake with cream cheese frosting.",
-      price: "$18",
-      image: "https://via.placeholder.com/150",
-      theme: "Carrot",
+      name: 'Carrot Cake',
+      description: 'Delicious carrot cake with cream cheese frosting.',
+      price: '$18',
+      image: 'https://via.placeholder.com/150',
+      theme: 'Carrot',
       availability: 2,
       rating: 5,
     },
     {
       id: 6,
-      name: "Lemon Cake",
-      description: "Tangy lemon cake with a zesty glaze.",
-      price: "$26",
-      image: "https://via.placeholder.com/150",
-      theme: "Lemon",
+      name: 'Lemon Cake',
+      description: 'Tangy lemon cake with a zesty glaze.',
+      price: '$26',
+      image: 'https://via.placeholder.com/150',
+      theme: 'Lemon',
       availability: 8,
       rating: 4,
     },
     {
       id: 7,
-      name: "Blueberry Cake",
-      description: "A sweet blueberry cake topped with fresh fruit.",
-      price: "$24",
-      image: "https://via.placeholder.com/150",
-      theme: "Blueberry",
+      name: 'Blueberry Cake',
+      description: 'A sweet blueberry cake topped with fresh fruit.',
+      price: '$24',
+      image: 'https://via.placeholder.com/150',
+      theme: 'Blueberry',
       availability: 6,
       rating: 5,
     },
     {
       id: 8,
-      name: "Coconut Cake",
-      description: "Rich coconut cake with a creamy coconut frosting.",
-      price: "$28",
-      image: "https://via.placeholder.com/150",
-      theme: "Coconut",
+      name: 'Coconut Cake',
+      description: 'Rich coconut cake with a creamy coconut frosting.',
+      price: '$28',
+      image: 'https://via.placeholder.com/150',
+      theme: 'Coconut',
       availability: 4,
       rating: 3,
     },
-  ]);
+  ])
+
+  const { bakery } = useContext(UserContext)
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch(`${import.meta.env.VITE_BACKENDURL}/bakery/getProducts`)
+        const data = await response.json()
+        setProducts(data)
+      } catch (error) {
+        console.error('Error fetching products:', error)
+      }
+    }
+
+    fetchProducts()
+  }, [bakery])
 
   const handleDelete = (id) => {
-    setProducts(products.filter((product) => product.id !== id));
-  };
+    setProducts(products.filter((product) => product.id !== id))
+  }
 
   const handleIncreaseQuantity = (id) => {
     setProducts(
@@ -96,8 +116,8 @@ const Myproducts = () => {
           ? { ...product, availability: product.availability + 1 }
           : product
       )
-    );
-  };
+    )
+  }
 
   const handleDecreaseQuantity = (id) => {
     setProducts(
@@ -106,39 +126,44 @@ const Myproducts = () => {
           ? { ...product, availability: product.availability - 1 }
           : product
       )
-    );
-  };
+    )
+  }
 
   const handleAddProduct = () => {
     const newProduct = {
       id: products.length + 1,
-      name: "New Cake",
-      description: "Description of the new cake.",
-      price: "$0",
-      image: "https://via.placeholder.com/150",
-      theme: "New",
+      name: 'New Cake',
+      description: 'Description of the new cake.',
+      price: '$0',
+      image: 'https://via.placeholder.com/150',
+      theme: 'New',
       availability: 0, // Initially set the availability to 0
       rating: 4,
-    };
-    setProducts([...products, newProduct]);
-  };
+    }
+    setProducts([...products, newProduct])
+  }
 
   const renderStars = (rating) => {
-    const stars = [];
+    const stars = []
     for (let i = 0; i < 5; i++) {
       stars.push(
-        <span key={i} className={`text-${i < rating ? "yellow" : "gray"}-500`}>
+        <span key={i} className={`text-${i < rating ? 'yellow' : 'gray'}-500`}>
           ★
         </span>
-      );
+      )
     }
-    return stars;
-  };
+    return stars
+  }
 
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar */}
-      <Sidebar />
+      <Sidebar
+        isDashboardOpen={isDashboardOpen}
+        setIsDashboardOpen={setIsDashboardOpen}
+        selectedItem={selectedItem}
+        setSelectedItem={setSelectedItem}
+      />
 
       {/* Main Content */}
       <div className="flex-1 p-10">
@@ -165,20 +190,22 @@ const Myproducts = () => {
                   alt={product.name}
                   className="w-full h-48 object-cover transition-all hover:opacity-80" // Decreased height here
                 />
-                <div className="p-4"> {/* Reduced padding */}
+                <div className="p-4">
+                  {' '}
+                  {/* Reduced padding */}
                   <h2 className="text-xl font-semibold text-gray-800 mb-2">
                     {product.name}
                   </h2>
-                  <p className="text-gray-600 text-sm mb-4 truncate overflow-hidden whitespace-nowrap h-7">{product.description}</p>
-
-
+                  <p className="text-gray-600 text-sm mb-4 truncate overflow-hidden whitespace-nowrap h-7">
+                    {product.description}
+                  </p>
                   {/* Theme Section - Highlighted */}
                   <p className="text-lg font-bold text-orange-500 mb-4">
                     Theme: {product.theme}
                   </p>
-
-                  <p className="text-lg font-bold text-gray-800">{product.price}</p>
-
+                  <p className="text-lg font-bold text-gray-800">
+                    {product.price}
+                  </p>
                   {/* Editable Quantity Section */}
                   <div className="flex justify-between items-center mt-4">
                     <p className="text-sm text-gray-500">Availability:</p>
@@ -203,13 +230,11 @@ const Myproducts = () => {
                       </button>
                     </div>
                   </div>
-
                   {/* Rating Section */}
                   <div className="flex items-center mt-2">
                     <p className="mr-2">Rating:</p>
                     {renderStars(product.rating)}
                   </div>
-
                   {/* Delete Button */}
                   <button
                     onClick={() => handleDelete(product.id)}
@@ -222,11 +247,13 @@ const Myproducts = () => {
             ))}
           </div>
         ) : (
-          <p className="text-gray-500">No products available. Add new products to get started.</p>
+          <p className="text-gray-500">
+            No products available. Add new products to get started.
+          </p>
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Myproducts;
+export default Myproducts
