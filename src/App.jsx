@@ -13,8 +13,11 @@ import Login from './components/login'
 import SignupPage from './components/signup'
 import Myproducts from './components/Myproducts'
 import Orders from './components/Orders'
-import Analytics from './components/Analytics'
-import Newitem from './components/Newitem'
+import Newitem from './components/Newitem';
+import Drivers from './components/Drivers';
+import Reports from './components/Reports';
+import Settings from './components/Settings';
+
 
 
 const App = () => {
@@ -94,6 +97,52 @@ const App = () => {
                 )
               }
             />
+          <Route
+  path="/analytics"
+  element={isAuthenticated ? <Analytics /> : <Navigate to="/login" />}
+/>
+<Route
+  path="/drivers"
+  element={
+    isAuthenticated ? (
+      bakery ? <Drivers /> : <Navigate to="/Drivers" />
+    ) : (
+      <Navigate to="/login" />
+    )
+  }
+/>
+<Route
+  path="/reports"
+  element={
+    isAuthenticated ? (
+      bakery ? <Reports /> : <Navigate to="/Reports" />
+    ) : (
+      <Navigate to="/login" />
+    )
+  }
+/>
+<Route
+  path="/newitem"
+  element={
+    isAuthenticated ? (
+      bakery ? <Newitem /> : <Navigate to="/Newitem" />
+    ) : (
+      <Navigate to="/login" />
+    )
+  }
+/>
+<Route
+  path="/settings"
+  element={
+    isAuthenticated ? (
+      bakery ? <Settings /> : <Navigate to="/Settings" />
+    ) : (
+      <Navigate to="/login" />
+    )
+  }
+/>
+
+
           </Routes>
         </div>
       </div>
