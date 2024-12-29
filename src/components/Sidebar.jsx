@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { useState, useContext } from 'react'
+import { Link } from 'react-router-dom' // Import Link from react-router-dom
 import {
   FaTachometerAlt,
   FaChartBar,
@@ -11,19 +11,27 @@ import {
   FaRegFileAlt,
   FaCog,
   FaStore,
-} from "react-icons/fa";
+  FaSignOutAlt,
+} from 'react-icons/fa'
+import { UserContext } from '../context/UserContext'
 
 const Sidebar = () => {
-  const [isDashboardOpen, setIsDashboardOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null); // Track selected item
+  const { logout } = useContext(UserContext)
+  const [isDashboardOpen, setIsDashboardOpen] = useState(false)
+  const [selectedItem, setSelectedItem] = useState(null) // Track selected item
 
   const toggleDashboard = () => {
-    setIsDashboardOpen(!isDashboardOpen); // Toggle dashboard section
-  };
+    setIsDashboardOpen(!isDashboardOpen) // Toggle dashboard section
+  }
+
+  const handleSignOut = () => {
+    setSelectedItem('signout') // Set the clicked item as selected
+    logout()
+  }
 
   const handleItemClick = (item) => {
-    setSelectedItem(item); // Set the clicked item as selected
-  };
+    setSelectedItem(item) // Set the clicked item as selected
+  }
 
   return (
     <div className="w-64 bg-white shadow-lg rounded-md m-2 flex flex-col">
@@ -35,18 +43,22 @@ const Sidebar = () => {
       <ul className="mt-4 flex-grow">
         {/* Dashboard with Toggle */}
         <li
-          className={`py-2 px-4 flex items-center cursor-pointer group rounded-md ${selectedItem === "dashboard" ? "bg-orange-500 text-white" : ""}`}
-          onClick={() => handleItemClick("dashboard")}
+          className={`py-2 px-4 flex items-center cursor-pointer group rounded-md ${
+            selectedItem === 'dashboard' ? 'bg-orange-500 text-white' : ''
+          }`}
+          onClick={() => handleItemClick('dashboard')}
         >
           <FaTachometerAlt className="mr-4 w-5 h-5" />
           <span className="flex-1">Dashboard</span>
-          <span onClick={toggleDashboard}>{isDashboardOpen ? "▲" : "▼"}</span>
+          <span onClick={toggleDashboard}>{isDashboardOpen ? '▲' : '▼'}</span>
         </li>
         {isDashboardOpen && (
           <ul className="ml-8">
             <li
-              className={`py-2 px-2 flex items-center cursor-pointer rounded-md ${selectedItem === "overview" ? "bg-orange-500 text-white" : ""}`}
-              onClick={() => handleItemClick("overview")}
+              className={`py-2 px-2 flex items-center cursor-pointer rounded-md ${
+                selectedItem === 'overview' ? 'bg-orange-500 text-white' : ''
+              }`}
+              onClick={() => handleItemClick('overview')}
             >
               <Link to="/overview" className="flex items-center">
                 <FaChartBar className="mr-4 w-5 h-5" />
@@ -54,8 +66,10 @@ const Sidebar = () => {
               </Link>
             </li>
             <li
-              className={`py-2 px-2 flex items-center cursor-pointer rounded-md ${selectedItem === "orders" ? "bg-orange-500 text-white" : ""}`}
-              onClick={() => handleItemClick("orders")}
+              className={`py-2 px-2 flex items-center cursor-pointer rounded-md ${
+                selectedItem === 'orders' ? 'bg-orange-500 text-white' : ''
+              }`}
+              onClick={() => handleItemClick('orders')}
             >
               <Link to="/orders" className="flex items-center">
                 <FaCreditCard className="mr-4 w-5 h-5" />
@@ -65,10 +79,11 @@ const Sidebar = () => {
           </ul>
         )}
 
-        {/* Marketplace Option */}
         <li
-          className={`py-2 px-4 flex items-center cursor-pointer rounded-md ${selectedItem === "marketplace" ? "bg-orange-500 text-white" : ""}`}
-          onClick={() => handleItemClick("marketplace")}
+          className={`py-2 px-4 flex items-center cursor-pointer rounded-md ${
+            selectedItem === 'marketplace' ? 'bg-orange-500 text-white' : ''
+          }`}
+          onClick={() => handleItemClick('marketplace')}
         >
           <Link to="/marketplace" className="flex items-center">
             <FaStore className="mr-4 w-5 h-5" />
@@ -77,19 +92,23 @@ const Sidebar = () => {
         </li>
 
         <li
-          className={`py-2 px-4 flex items-center cursor-pointer rounded-md ${selectedItem === "marketplace" ? "bg-orange-500 text-white" : ""}`}
-          onClick={() => handleItemClick("marketplace")}
+          className={`py-2 px-4 flex items-center cursor-pointer rounded-md ${
+            selectedItem === 'myproducts' ? 'bg-orange-500 text-white' : ''
+          }`}
+          onClick={() => handleItemClick('marketplace')}
         >
-          <Link to="/marketplace" className="flex items-center">
+          <Link to="/myproducts" className="flex items-center">
             <FaStore className="mr-4 w-5 h-5" />
-            <span>Marketplace</span>
+            <span>My Products</span>
           </Link>
         </li>
 
         {/* Other Sidebar Options */}
         <li
-          className={`py-2 px-4 flex items-center cursor-pointer rounded-md ${selectedItem === "analytics" ? "bg-orange-500 text-white" : ""}`}
-          onClick={() => handleItemClick("analytics")}
+          className={`py-2 px-4 flex items-center cursor-pointer rounded-md ${
+            selectedItem === 'analytics' ? 'bg-orange-500 text-white' : ''
+          }`}
+          onClick={() => handleItemClick('analytics')}
         >
           <Link to="/analytics" className="flex items-center">
             <FaChartBar className="mr-4 w-5 h-5" />
@@ -97,8 +116,10 @@ const Sidebar = () => {
           </Link>
         </li>
         <li
-          className={`py-2 px-4 flex items-center cursor-pointer rounded-md ${selectedItem === "payments" ? "bg-orange-500 text-white" : ""}`}
-          onClick={() => handleItemClick("payments")}
+          className={`py-2 px-4 flex items-center cursor-pointer rounded-md ${
+            selectedItem === 'payments' ? 'bg-orange-500 text-white' : ''
+          }`}
+          onClick={() => handleItemClick('payments')}
         >
           <Link to="/payments" className="flex items-center">
             <FaCreditCard className="mr-4 w-5 h-5" />
@@ -106,8 +127,10 @@ const Sidebar = () => {
           </Link>
         </li>
         <li
-          className={`py-2 px-4 flex items-center cursor-pointer rounded-md ${selectedItem === "drivers" ? "bg-orange-500 text-white" : ""}`}
-          onClick={() => handleItemClick("drivers")}
+          className={`py-2 px-4 flex items-center cursor-pointer rounded-md ${
+            selectedItem === 'drivers' ? 'bg-orange-500 text-white' : ''
+          }`}
+          onClick={() => handleItemClick('drivers')}
         >
           <Link to="/drivers" className="flex items-center">
             <FaUsers className="mr-4 w-5 h-5" />
@@ -115,8 +138,10 @@ const Sidebar = () => {
           </Link>
         </li>
         <li
-          className={`py-2 px-4 flex items-center cursor-pointer rounded-md ${selectedItem === "advertising" ? "bg-orange-500 text-white" : ""}`}
-          onClick={() => handleItemClick("advertising")}
+          className={`py-2 px-4 flex items-center cursor-pointer rounded-md ${
+            selectedItem === 'advertising' ? 'bg-orange-500 text-white' : ''
+          }`}
+          onClick={() => handleItemClick('advertising')}
         >
           <Link to="/advertising" className="flex items-center">
             <FaBullhorn className="mr-4 w-5 h-5" />
@@ -124,8 +149,10 @@ const Sidebar = () => {
           </Link>
         </li>
         <li
-          className={`py-2 px-4 flex items-center cursor-pointer rounded-md ${selectedItem === "messages" ? "bg-orange-500 text-white" : ""}`}
-          onClick={() => handleItemClick("messages")}
+          className={`py-2 px-4 flex items-center cursor-pointer rounded-md ${
+            selectedItem === 'messages' ? 'bg-orange-500 text-white' : ''
+          }`}
+          onClick={() => handleItemClick('messages')}
         >
           <Link to="/messages" className="flex items-center">
             <FaEnvelope className="mr-4 w-5 h-5" />
@@ -133,8 +160,10 @@ const Sidebar = () => {
           </Link>
         </li>
         <li
-          className={`py-2 px-4 flex items-center cursor-pointer rounded-md ${selectedItem === "notifications" ? "bg-orange-500 text-white" : ""}`}
-          onClick={() => handleItemClick("notifications")}
+          className={`py-2 px-4 flex items-center cursor-pointer rounded-md ${
+            selectedItem === 'notifications' ? 'bg-orange-500 text-white' : ''
+          }`}
+          onClick={() => handleItemClick('notifications')}
         >
           <Link to="/notifications" className="flex items-center">
             <FaBell className="mr-4 w-5 h-5" />
@@ -150,8 +179,21 @@ const Sidebar = () => {
       <div className="p-4">
         <ul>
           <li
-            className={`py-2 px-4 flex items-center cursor-pointer rounded-md ${selectedItem === "report" ? "bg-orange-500 text-white" : ""}`}
-            onClick={() => handleItemClick("report")}
+            className={`py-2 px-4 flex items-center cursor-pointer rounded-md ${
+              selectedItem === 'signout' ? 'bg-orange-500 text-white' : ''
+            }`}
+            onClick={() => handleSignOut()}
+          >
+            <Link to="/report" className="flex items-center">
+              <FaSignOutAlt className="mr-4 w-5 h-5" />
+              <span>Logout</span>
+            </Link>
+          </li>
+          <li
+            className={`py-2 px-4 flex items-center cursor-pointer rounded-md ${
+              selectedItem === 'report' ? 'bg-orange-500 text-white' : ''
+            }`}
+            onClick={() => handleItemClick('report')}
           >
             <Link to="/report" className="flex items-center">
               <FaRegFileAlt className="mr-4 w-5 h-5" />
@@ -159,8 +201,10 @@ const Sidebar = () => {
             </Link>
           </li>
           <li
-            className={`py-2 px-4 flex items-center cursor-pointer rounded-md ${selectedItem === "settings" ? "bg-orange-500 text-white" : ""}`}
-            onClick={() => handleItemClick("settings")}
+            className={`py-2 px-4 flex items-center cursor-pointer rounded-md ${
+              selectedItem === 'settings' ? 'bg-orange-500 text-white' : ''
+            }`}
+            onClick={() => handleItemClick('settings')}
           >
             <Link to="/settings" className="flex items-center">
               <FaCog className="mr-4 w-5 h-5" />
@@ -170,7 +214,7 @@ const Sidebar = () => {
         </ul>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar
