@@ -1,9 +1,11 @@
-/* eslint-disable react/prop-types */
-import { useState } from 'react'
+ 
+import { useState, useContext } from 'react'
 import { FaEnvelope, FaLock, FaGoogle, FaFacebook } from 'react-icons/fa'
 import axios from 'axios'
+import { UserContext } from '../context/UserContext'
 
-const LoginPage = ({ setBakery }) => {
+const LoginPage = () => {
+  const { setBakery } = useContext(UserContext)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -36,6 +38,8 @@ const LoginPage = ({ setBakery }) => {
       .then((response) => {
         console.log('Login successful:', response.data)
         setBakery(response.data.bakery)
+        localStorage.setItem('bakery', JSON.stringify(response.data.bakery));
+        localStorage.setItem('token', response.data.token);
         // Handle successful login (e.g., redirect to dashboard)
       })
       .catch((error) => {
