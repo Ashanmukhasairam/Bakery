@@ -34,7 +34,7 @@ const Sidebar = () => {
   }
 
   return (
-    <div className="w-64 bg-white shadow-lg rounded-md m-2 flex flex-col">
+    <div className="w-64 bg-white shadow-lg rounded-md m-2 flex flex-col h-screen overflow-y-auto">
       {/* Logo + Name */}
       <div className="flex justify-center items-center p-4 border-b border-gray-200">
         <span className="text-xl font-bold text-gray-800">FROSTIQ</span>
@@ -102,6 +102,7 @@ const Sidebar = () => {
             <span>My Products</span>
           </Link>
         </li>
+
 
         {/* Other Sidebar Options */}
         <li
