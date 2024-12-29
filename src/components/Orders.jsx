@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import Sidebar from "./Sidebar";
 
-const Marketplace = () => {
+const Orders = () => {
   const [searchTerm, setSearchTerm] = useState(""); // State for search bar
   const [orders, setOrders] = useState([
     {
@@ -184,4 +184,4 @@ const Marketplace = () => {
   );
 };
 
-export default Marketplace;
+export default Orders;

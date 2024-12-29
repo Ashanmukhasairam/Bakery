@@ -76,6 +76,18 @@ const Sidebar = () => {
           </Link>
         </li>
 
+
+
+        <li
+          className={`py-2 px-4 flex items-center cursor-pointer rounded-md ${selectedItem === "myproducts" ? "bg-orange-500 text-white" : ""}`}
+          onClick={() => handleItemClick("myproducts")}
+        >
+          <Link to="/myproducts" className="flex items-center">
+            <FaStore className="mr-4 w-5 h-5" />
+            <span>Myproducts</span>
+          </Link>
+        </li>
+
         {/* Other Sidebar Options */}
         <li
           className={`py-2 px-4 flex items-center cursor-pointer rounded-md ${selectedItem === "analytics" ? "bg-orange-500 text-white" : ""}`}

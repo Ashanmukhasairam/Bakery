@@ -24,6 +24,14 @@ const LoginPage = () => {
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
       <div className="bg-white rounded-lg shadow-lg p-8 w-96">
+        {/* Text Logo */}
+        <div className="text-center mb-6">
+          <h1 className="text-4xl font-bold text-blue-500">
+            FROSTIQ
+          </h1>
+          <p className="text-sm text-gray-600">Your one-stop platform</p>
+        </div>
+
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Login</h2>
 
         {/* Login Form */}
@@ -64,14 +72,14 @@ const LoginPage = () => {
             {/* Forgot Password Link */}
             <a
               href="/forgot-password"
-              className="text-blue-500 absolute top-0 right-0  mr-3 text-sm hover:underline mb-4"
+              className="text-blue-500 absolute top-0 right-0 mr-3 text-sm hover:underline mb-4"
             >
               Forgot Password?
             </a>
           </div>
 
           {/* Login Button */}
-          <button
+          <button 
             type="submit"
             className="w-full bg-blue-500 text-white py-3 rounded-md hover:bg-blue-600 transition"
           >
