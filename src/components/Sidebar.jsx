@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import {
   FaTachometerAlt,
@@ -13,16 +13,18 @@ import {
   FaStore,
 } from "react-icons/fa";
 
-const Sidebar = ({  isDashboardOpen,
+const Sidebar = ({
+  isDashboardOpen,
   setIsDashboardOpen,
   selectedItem,
-  setSelectedItem,}) => {
-  // const [selectedItem, setSelectedItem] = useState(null); // Track selected item
-
+  setSelectedItem,
+}) => {
+  // Toggle dashboard section
   const toggleDashboard = () => {
     setIsDashboardOpen(!isDashboardOpen); // Toggle dashboard section
   };
 
+  // Handle item click to set selected item
   const handleItemClick = (item) => {
     setSelectedItem(item); // Set the clicked item as selected
   };
@@ -42,7 +44,7 @@ const Sidebar = ({  isDashboardOpen,
           }`}
           onClick={() => handleItemClick("dashboard")}
         >
-          <Link to="/dashboard" className="flex items-center" >
+          <Link to="/dashboard" className="flex items-center">
             <FaTachometerAlt className="mr-4 w-5 h-5" />
             <span>Dashboard</span>
           </Link>
@@ -93,6 +95,7 @@ const Sidebar = ({  isDashboardOpen,
           </Link>
         </li>
 
+        {/* My Products Option */}
         <li
           className={`py-2 px-4 flex items-center cursor-pointer rounded-md ${
             selectedItem === "myproducts" ? "bg-orange-500 text-white" : ""

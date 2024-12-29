@@ -169,7 +169,8 @@ const Myproducts = () => {
                   <h2 className="text-xl font-semibold text-gray-800 mb-2">
                     {product.name}
                   </h2>
-                  <p className="text-gray-600 text-sm mb-4">{product.description}</p>
+                  <p className="text-gray-600 text-sm mb-4 truncate overflow-hidden whitespace-nowrap h-7">{product.description}</p>
+
 
                   {/* Theme Section - Highlighted */}
                   <p className="text-lg font-bold text-orange-500 mb-4">
