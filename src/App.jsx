@@ -89,12 +89,14 @@ const App = () => {
             <Route
               path="/newitem"
               element={isAuthenticated ? <Newitem /> : <Navigate to="/login" />}
+
             />
             <Route
               path="/orderdetail"
               element={
                 isAuthenticated ? <Orderdetail /> : <Navigate to="/login" />
               }
+
             />
             <Route
               path="*"
@@ -136,6 +138,7 @@ const App = () => {
                 isAuthenticated ? <Messages /> : <Navigate to="/login" />
               }
             />
+
             <Route
               path="/orderdetail/:order_id"
               element={

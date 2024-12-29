@@ -41,6 +41,7 @@ const Orders = () => {
     },
   ]);
 
+  const navigate = useNavigate();
   const handleSearch = (event) => setSearchTerm(event.target.value);
 
   const handleStatusChange = (event) => setSelectedStatus(event.target.value);
