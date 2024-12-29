@@ -26,7 +26,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="w-64 bg-white shadow-lg rounded-md m-2 flex flex-col">
+    <div className="w-64 bg-white shadow-lg rounded-md m-2 flex flex-col h-screen overflow-y-auto">
       {/* Logo + Name */}
       <div className="flex justify-center items-center p-4 border-b border-gray-200">
         <span className="text-xl font-bold text-gray-800">FROSTIQ</span>
@@ -66,16 +66,6 @@ const Sidebar = () => {
         )}
 
         {/* Marketplace Option */}
-        <li
-          className={`py-2 px-4 flex items-center cursor-pointer rounded-md ${selectedItem === "marketplace" ? "bg-orange-500 text-white" : ""}`}
-          onClick={() => handleItemClick("marketplace")}
-        >
-          <Link to="/marketplace" className="flex items-center">
-            <FaStore className="mr-4 w-5 h-5" />
-            <span>Marketplace</span>
-          </Link>
-        </li>
-
         <li
           className={`py-2 px-4 flex items-center cursor-pointer rounded-md ${selectedItem === "marketplace" ? "bg-orange-500 text-white" : ""}`}
           onClick={() => handleItemClick("marketplace")}

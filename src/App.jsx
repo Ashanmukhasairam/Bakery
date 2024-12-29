@@ -13,14 +13,13 @@ import Login from './components/login'
 import SignupPage from './components/signup'
 import Myproducts from './components/Myproducts'
 import Orders from './components/Orders'
-import Newitem from './components/Newitem';
-import Drivers from './components/Drivers';
-import Reports from './components/Reports';
-import Settings from './components/Settings';
-import Analytics from './components/Analytics';
-import Messages from './components/Messages';
-
-
+import Newitem from './components/Newitem'
+import Drivers from './components/Drivers'
+import Reports from './components/Reports'
+import Settings from './components/Settings'
+import Analytics from './components/Analytics'
+import Messages from './components/Messages'
+import Orderdetail from './components/Orderdetail'
 
 const App = () => {
   const { isAuthenticated } = useContext(UserContext)
@@ -80,14 +79,22 @@ const App = () => {
                 isAuthenticated ? <Myproducts /> : <Navigate to="/login" />
               }
             />
-            
+
             <Route
-                path="/analytics"
-                element={isAuthenticated ? <Analytics /> : <Navigate to="/login" />}
+              path="/analytics"
+              element={
+                isAuthenticated ? <Analytics /> : <Navigate to="/login" />
+              }
             />
             <Route
-                path="/newitem"
-                element={isAuthenticated ? <Newitem /> : <Navigate to="/login" />}
+              path="/newitem"
+              element={isAuthenticated ? <Newitem /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/orderdetail"
+              element={
+                isAuthenticated ? <Orderdetail /> : <Navigate to="/login" />
+              }
             />
             <Route
               path="*"
@@ -99,49 +106,42 @@ const App = () => {
                 )
               }
             />
-          <Route
-  path="/analytics"
-  element={isAuthenticated ? <Analytics /> : <Navigate to="/login" />}
-/>
-<Route
-  path="/drivers"
-  element={
-    isAuthenticated ?<Drivers /> : <Navigate to="/login" />
-    
-  }
-/>
-<Route
-  path="/reports"
-  element={
-    isAuthenticated ? <Reports /> :
-      <Navigate to="/login" />
-  }
-/>
-<Route
-  path="/newitem"
-  element={
-    isAuthenticated ? <Newitem /> : 
-      <Navigate to="/login" />
-  }
-/>
-<Route
-  path="/settings"
-  element={
-    isAuthenticated ? 
-        <Settings /> : <Navigate to="/login" />
-
-    
-  }
-/>
-<Route 
-path="/messages"
-element={
-  isAuthenticated ?
-  <Messages /> : <Navigate to="/login"/>
-}
-/>
-
-
+            <Route
+              path="/analytics"
+              element={
+                isAuthenticated ? <Analytics /> : <Navigate to="/login" />
+              }
+            />
+            <Route
+              path="/drivers"
+              element={isAuthenticated ? <Drivers /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/reports"
+              element={isAuthenticated ? <Reports /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/newitem"
+              element={isAuthenticated ? <Newitem /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/settings"
+              element={
+                isAuthenticated ? <Settings /> : <Navigate to="/login" />
+              }
+            />
+            <Route
+              path="/messages"
+              element={
+                isAuthenticated ? <Messages /> : <Navigate to="/login" />
+              }
+            />
+            <Route
+              path="/orderdetail/:order_id"
+              element={
+                isAuthenticated ? <Orderdetail /> : <Navigate to="/login" />
+              }
+            />
           </Routes>
         </div>
       </div>
