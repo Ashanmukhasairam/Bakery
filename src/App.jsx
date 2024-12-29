@@ -13,10 +13,9 @@ import Login from './components/login'
 import SignupPage from './components/signup'
 import Myproducts from './components/Myproducts'
 import Orders from './components/Orders'
+import Analytics from './components/Analytics'
+import Newitem from './components/Newitem'
 
-
-
-<Route path="/analytics" element={<Analytics />} />
 
 const App = () => {
   const { isAuthenticated } = useContext(UserContext)
@@ -75,6 +74,15 @@ const App = () => {
               element={
                 isAuthenticated ? <Myproducts /> : <Navigate to="/login" />
               }
+            />
+            
+            <Route
+                path="/analytics"
+                element={isAuthenticated ? <Analytics /> : <Navigate to="/login" />}
+            />
+            <Route
+                path="/newitem"
+                element={isAuthenticated ? <Newitem /> : <Navigate to="/login" />}
             />
             <Route
               path="*"
