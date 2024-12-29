@@ -34,7 +34,7 @@ export const UserProvider = ({ children }) => {
   }, [bakery]);
 
   const isAuthenticated = !!localStorage.getItem('token');
-
+  // const isAuthenticated =true;
   const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('bakery');

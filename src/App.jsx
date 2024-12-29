@@ -17,6 +17,8 @@ import Newitem from './components/Newitem';
 import Drivers from './components/Drivers';
 import Reports from './components/Reports';
 import Settings from './components/Settings';
+import Analytics from './components/Analytics';
+import Messages from './components/Messages';
 
 
 
@@ -97,42 +99,39 @@ const App = () => {
 <Route
   path="/drivers"
   element={
-    isAuthenticated ? (
-      bakery ? <Drivers /> : <Navigate to="/Drivers" />
-    ) : (
-      <Navigate to="/login" />
-    )
+    isAuthenticated ?<Drivers /> : <Navigate to="/login" />
+    
   }
 />
 <Route
   path="/reports"
   element={
-    isAuthenticated ? (
-      bakery ? <Reports /> : <Navigate to="/Reports" />
-    ) : (
+    isAuthenticated ? <Reports /> :
       <Navigate to="/login" />
-    )
   }
 />
 <Route
   path="/newitem"
   element={
-    isAuthenticated ? (
-      bakery ? <Newitem /> : <Navigate to="/Newitem" />
-    ) : (
+    isAuthenticated ? <Newitem /> : 
       <Navigate to="/login" />
-    )
   }
 />
 <Route
   path="/settings"
   element={
-    isAuthenticated ? (
-      bakery ? <Settings /> : <Navigate to="/Settings" />
-    ) : (
-      <Navigate to="/login" />
-    )
+    isAuthenticated ? 
+        <Settings /> : <Navigate to="/login" />
+
+    
   }
+/>
+<Route 
+path="/messages"
+element={
+  isAuthenticated ?
+  <Messages /> : <Navigate to="/login"/>
+}
 />
 
 
