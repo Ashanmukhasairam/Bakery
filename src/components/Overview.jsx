@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FaSearch, FaFilter } from "react-icons/fa"; // Import search and filter icons
 import Sidebar from "./Sidebar";
 
 const Overview = () => {
   const [isDashboardOpen, setIsDashboardOpen] = useState(true);
-  const [selectedItem, setSelectedItem] =  useState(true);
+  const [selectedItem, setSelectedItem] =  useState('overview');
   const [searchTerm, setSearchTerm] = useState(""); // State for search
   const [filterDate, setFilterDate] = useState(""); // State for filter by date
   const [selectedDateOrders, setSelectedDateOrders] = useState([]); // To store orders for selected date
