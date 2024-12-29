@@ -22,7 +22,7 @@ const SignupPage = () => {
 
         {/* Signup Form */}
         <form onSubmit={handleSubmit}>
-          {/* First Name Input */}
+          {/* First Name Input */}``
           <div className="mb-4">
             <label htmlFor="firstName" className="block text-gray-700">First Name</label>
             <input

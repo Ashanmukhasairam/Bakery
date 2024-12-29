@@ -1,34 +1,95 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import MarketPlace from "./components/MarketPlace"; // Adjust the path based on your folder structure
-import OrderProcess from "./components/OrderProcess"; // Adjust the path based on your folder structure
-import Overview from "./components/Overview";
-import Login from "./components/Login"
-import SignupPage from "./components/Signup";
-import MyProducts from "./components/MyProducts";
-import Dashboard from "./components/Dashboard";
+import { useState, useEffect } from 'react'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom'
+import axios from 'axios'
+import Cookies from 'js-cookie'
+import MarketPlace from './components/MarketPlace'
+import OrderProcess from './components/OrderProcess'
+import Overview from './components/Overview'
+import Login from './components/login'
+import SignupPage from './components/signup'
+import Myproducts from './components/Myproducts'
+import Orders from './components/Orders'
 
 const App = () => {
+  const [bakery, setBakery] = useState(null)
+
+  useEffect(() => {
+    const token = Cookies.get('token')
+    if (token) {
+      const fetchBakeryData = async () => {
+        try {
+          const response = await axios.get(
+            `${import.meta.env.VITE_BACKEND_URL}/account/bakery`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+              withCredentials: true,
+            }
+          )
+          setBakery(response.data.bakery)
+        } catch (error) {
+          console.error('Error fetching bakery data:', error)
+        }
+      }
+
+      fetchBakeryData()
+    }
+  }, [])
+
   return (
     <Router>
       <div className="bg-gray-100 min-h-screen">
-        {/* Main Content */}
         <div className="p-6">
           <Routes>
-            <Route path="/" element={<Login/>}/>
-            <Route path="/dashboard" element={<Overview/>}/>
-            <Route path="/login" element={<Login/>}/>
-            <Route path="/marketplace" element={<MarketPlace />} />
-            <Route path="/order-process" element={<OrderProcess />} />
-            <Route path="/overview" element={<Overview/>}/>
-            <Route path="/signup" element={<SignupPage/>}/>
-            <Route path="/orders" element={<order/>}/>
-            <Route path="/myproducts" element={<MyProducts/>}/>
+            <Route
+              path="/"
+              element={
+                bakery ? <Navigate to="/overview" /> : <Navigate to="/login" />
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                bakery ? (
+                  <Navigate to="/overview" />
+                ) : (
+                  <Login setBakery={setBakery} />
+                )
+              }
+            />
+            <Route
+              path="/overview"
+              element={bakery ? <Overview /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/marketplace"
+              element={bakery ? <MarketPlace /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/order-process"
+              element={bakery ? <OrderProcess /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/signup"
+              element={bakery ? <Navigate to="/overview" /> : <SignupPage />}
+            />
+            <Route
+              path="/orders"
+              element={bakery ? <Orders /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/myproducts"
+              element={bakery ? <Myproducts /> : <Navigate to="/login" />}
+            />
           </Routes>
         </div>
       </div>
     </Router>
-  );
-};
+  )
+}
 
-export default App;
+export default App

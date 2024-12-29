@@ -1,44 +1,83 @@
-import React, { useState } from "react";
-import { FaEnvelope, FaLock, FaGoogle, FaFacebook } from "react-icons/fa";
+/* eslint-disable react/prop-types */
+import { useState } from 'react'
+import { FaEnvelope, FaLock, FaGoogle, FaFacebook } from 'react-icons/fa'
+import axios from 'axios'
 
-const LoginPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const LoginPage = ({ setBakery }) => {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     // Logic for handling login (validation and API call)
-    console.log("Login with:", email, password);
-  };
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      alert('Please enter a valid email address.')
+      return
+    }
+
+    if (!email || !password) {
+      return
+    }
+
+    const backendUrl = import.meta.env.VITE_BACKEND_URL
+
+    axios
+      .post(
+        `${backendUrl}/account/signin`,
+        { email, password },
+        {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+      .then((response) => {
+        console.log('Login successful:', response.data)
+        setBakery(response.data.bakery)
+        // Handle successful login (e.g., redirect to dashboard)
+      })
+      .catch((error) => {
+        console.error('Login error:', error)
+        alert('Login failed. Please check your credentials and try again.')
+      })
+
+
+
+    console.log('Login with:', email, password)
+  }
 
   const handleGoogleLogin = () => {
-    console.log("Logging in with Google");
+    console.log('Logging in with Google')
     // Add Google login logic here
-  };
+  }
 
   const handleFacebookLogin = () => {
-    console.log("Logging in with Facebook");
+    console.log('Logging in with Facebook')
     // Add Facebook login logic here
-  };
+  }
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
       <div className="bg-white rounded-lg shadow-lg p-8 w-96">
         {/* Text Logo */}
         <div className="text-center mb-6">
-          <h1 className="text-4xl font-bold text-blue-500">
-            FROSTIQ
-          </h1>
+          <h1 className="text-4xl font-bold text-blue-500">FROSTIQ</h1>
           <p className="text-sm text-gray-600">Your one-stop platform</p>
         </div>
 
-        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Login</h2>
+        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
+          Login
+        </h2>
 
         {/* Login Form */}
         <form onSubmit={handleSubmit}>
           {/* Email Input */}
           <div className="mb-4">
-            <label htmlFor="email" className="block text-gray-700">Email ID</label>
+            <label htmlFor="email" className="block text-gray-700">
+              Email ID
+            </label>
             <div className="flex items-center border border-gray-300 rounded-md">
               <FaEnvelope className="text-gray-500 ml-3" />
               <input
@@ -55,7 +94,9 @@ const LoginPage = () => {
 
           {/* Password Input with Forgot Password Link */}
           <div className="mb-6 relative">
-            <label htmlFor="password" className="block text-gray-700">Password</label>
+            <label htmlFor="password" className="block text-gray-700">
+              Password
+            </label>
             <div className="flex items-center border border-gray-300 rounded-md">
               <FaLock className="text-gray-500 ml-3" />
               <input
@@ -79,7 +120,7 @@ const LoginPage = () => {
           </div>
 
           {/* Login Button */}
-          <button 
+          <button
             type="submit"
             className="w-full bg-blue-500 text-white py-3 rounded-md hover:bg-blue-600 transition"
           >
@@ -89,8 +130,11 @@ const LoginPage = () => {
 
         {/* Sign Up Link */}
         <div className="mt-4 text-center">
-          <span className="text-gray-600">Don't have an account?</span>
-          <a href="/signup" className="text-blue-500 hover:underline"> Sign Up</a>
+          <span className="text-gray-600">Don&apos;t have an account?</span>
+          <a href="/signup" className="text-blue-500 hover:underline">
+            {' '}
+            Sign Up
+          </a>
         </div>
 
         {/* Social Media Login Buttons */}
@@ -116,7 +160,7 @@ const LoginPage = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default LoginPage;
+export default LoginPage
