@@ -20,8 +20,6 @@ const formatDateTime = (dateTime) => {
 const Orders = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("All");
-  const navigate = useNavigate();
-
   const [orders] = useState([
     {
       order_id: "ORD001",
